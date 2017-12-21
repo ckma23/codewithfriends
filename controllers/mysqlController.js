@@ -4,22 +4,26 @@ var dbservice = require('./helper/dbservice.js');
 var app = express();
 
 module.exports.getfunction = function (req,res){
-  res.send(dbservice.gethandler("SELECT * FROM Places"))
+  const getquery = "Select * from Places"
+  res.send(dbservice.gethandler(getquery))
   // dbservice.gethandler("SELECT * FROM Places")
   // res.send("Get was successful")
 }
 
 module.exports.postfunction = function(req,res) {
-  dbservice.inserthandler("INSERT INTO Places(name, city) VALUES('Brewery','Seattle')")
+  const insertquery = "INSERT INTO Places(name, city) VALUES('Brewery','Seattle')"
+  dbservice.inserthandler(insertquery)
   res.send("Post was successful")
 }
 
 module.exports.putfunction = function(req,res) {
-  dbservice.puthandler("UPDATE Places SET name = 'Bowling' WHERE name = 'Brewery'")
+  const putquery = "UPDATE Places SET name = 'Bowling' WHERE name = 'Brewery'"
+  dbservice.puthandler(putquery)
   res.send("Record was updated successfully")
 }
 
 module.exports.deletefunction = function(req,res) {
-  dbservice.deletehandler("DELETE FROM Places WHERE name = 'Bowling'")
+  const deletequery = "DELETE FROM Places WHERE name = 'Bowling'"
+  dbservice.deletehandler(deletequery)
   res.send("Record was deleted successfully")
 }

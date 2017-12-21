@@ -14,20 +14,10 @@ function mysqlconnectioncloser(){
   console.log("The connection is closed")
 }
 
-function gethandler(query){
+function gethandler(query, callback){
   mysqlconnectionopener();
-  connection.query(query, function (error,results,fields){
-    if (error){
-      console.log("There was an error in obtaining the query", error)
-      return
-    }
-    else {
-      console.log("got a query back", query)
-      // return JSON.stringify(results)
-    }
-    console.log("There was a total of", results.length)
-    console.log(results)
-    return JSON.stringify(results)
+  connection.query(query, function (error,results,fields) {
+    callback(error, results);
   })
   mysqlconnectioncloser();
 }

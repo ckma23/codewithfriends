@@ -3,11 +3,14 @@ var express = require('express');
 var dbservice = require('./helper/dbservice.js');
 var app = express();
 
-module.exports.getfunction = function (req,res){
-  const getquery = "Select * from Places"
-  res.send(dbservice.gethandler(getquery))
-  // dbservice.gethandler("SELECT * FROM Places")
-  // res.send("Get was successful")
+module.exports.getfunction = function (req, res){
+  const getquery = "SELECT * from Places"
+  dbservice.gethandler(getquery, function(err, results){
+    if (err) {
+      console.log("Error")
+    }
+    res.send(results);
+  });
 }
 
 module.exports.postfunction = function(req,res) {

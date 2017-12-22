@@ -1,22 +1,50 @@
 var mysql = require ('mysql');
 var express = require('express');
+var bodyParser = require('body-parser');
 var dbservice = require('./helper/dbservice.js');
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-module.exports.getfunction = function (req, res){
-  const getquery = "SELECT * from Places"
-  dbservice.gethandler(getquery, function(err, results){
+
+module.exports.getfunction = function (req,res){
+  const getquery = "Select * from Places"
+  dbservice.gethandler(getquery, function(err,results){
     if (err) {
       console.log("Error")
     }
-    res.send(results);
+    res.send(results)
   });
 }
 
-module.exports.postfunction = function(req,res) {
-  const insertquery = "INSERT INTO Places(name, city) VALUES('Brewery','Seattle')"
-  dbservice.inserthandler(insertquery)
-  res.send("Post was successful")
+module.exports.getfunctionid = function (req,res){
+  const getquery = "Select * from Places where id=?"
+  dbservice.gethandlerid(getquery,req.params.id,function(err,results){
+    if (err) {
+      console.log("Error")
+    }
+    res.send(results)
+  });
+}
+
+// module.exports.postfunction = function(req,res) {
+//   const insertquery = "INSERT INTO Places(date, time, name, address) VALUES('2017-12-12','15:00:00','Coffee','Portland')"
+//   dbservice.inserthandler(insertquery)
+//   res.status(200);
+//   res.json({"status":"success"})
+// }
+
+module.exports.postfunction = function(req,res){
+  const insertquery = 'INSERT INTO Users SET ?'
+  let postData = req.body;
+  // let postData={"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}
+  console.log(postData);
+  dbservice.posthandler(insertquery,postData,function(err,results){
+    if (err) {
+      console.log("Error")
+    }
+    res.send(results)
+  });
 }
 
 module.exports.putfunction = function(req,res) {

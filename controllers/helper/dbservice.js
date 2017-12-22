@@ -14,6 +14,7 @@ function mysqlconnectioncloser(){
   console.log("The connection is closed")
 }
 
+
 function databasecreator(){
   connection.query()
 }
@@ -51,7 +52,6 @@ function gethandlerid(query,id,callback){
     console.log("There was a total of", results.length)
     console.log(results)
     callback(error,results);
-    // return results
   })
   mysqlconnectioncloser();
 }

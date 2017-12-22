@@ -6,6 +6,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 module.exports.getfunction = function (req,res){
   const getquery = "Select * from Places"
   dbservice.gethandler(getquery, function(err,results){

@@ -35,7 +35,7 @@ module.exports.getfunctionid = function (req,res){
 // }
 
 module.exports.postfunction = function(req,res){
-  const insertquery = 'INSERT INTO Users SET ?'
+  const insertquery = 'INSERT INTO Places SET ?'
   let postData = req.body;
   // let postData={"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}
   console.log(postData);

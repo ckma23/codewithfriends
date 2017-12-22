@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS test;
+
+CREATE TABLE IF NOT EXISTS Places(
+  id INT Primary Key AUTO_INCREMENT,
+  date DATE NOT NULL,
+  time TIME NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  address VARCHAR(50)) NOT NULL;
+
+
+  CREATE TABLE IF NOT EXISTS Users(
+    id INT Primary Key AUTO_INCREMENT,
+    Firstname VARCHAR(50),
+    Lastname VARCHAR(50));

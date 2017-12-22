@@ -4,6 +4,7 @@ var routes = require('./routes/mainroutes.js')
 var app = express(); // pass express now known as app
 
 app.use(bodyParser.json());
+app.use('/', routes);
 
 app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin","*");

@@ -3,7 +3,7 @@ var router = express.Router(); // can be written as require('express').Router() 
 var mysqlController = require ('../controllers/mysqlController.js')
 var mysqldbtablecreator = require('../models/mysqldbtablecreator.js')
 
-router.get('/', function(req,res){
+router.get('/index', function(req,res){
   res.send('Welcome to back end API');
 });
 

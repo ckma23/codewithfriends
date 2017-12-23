@@ -1,4 +1,8 @@
 var mysql = require ('mysql');
+// var express = require('express');
+// var app = express();
+// console.log("Enivornment is", app.get('env'))
+
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',

@@ -19,6 +19,7 @@ var server = app.listen(4000, function(){
 function startupprint(Welcome,Message) {
   console.log("App is up and running now",Welcome);
   console.log("To seed the database and tables is mapped here",Message)
+  // console.log("The environment is", app.get('env'));
 }
 startupprint("CodewithFriends","--> mainroutes.js")
 

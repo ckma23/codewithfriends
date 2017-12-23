@@ -1,10 +1,11 @@
 var mysql = require ('mysql');
-var express = require('express');
-var bodyParser = require('body-parser');
 var dbservice = require('./helper/dbservice.js');
-var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// var express = require('express');
+// var bodyParser = require('body-parser');
+// var app = express();
+
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 
 module.exports.getfunction = function (req,res){
@@ -35,16 +36,18 @@ module.exports.getfunctionid = function (req,res){
 // }
 
 module.exports.postfunction = function(req,res){
-  const insertquery = 'INSERT INTO Places SET ?'
-  let postData = req.body;
+  // let postData = req.body;
+  // const insertquery = 'INSERT INTO Places SET ?'
+  console.log('req', req.body);
   // let postData={"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}
-  console.log(postData);
-  dbservice.posthandler(insertquery,postData,function(err,results){
-    if (err) {
-      console.log("Error")
-    }
-    res.send(results)
-  });
+  // console.log(postData);
+  res.end();
+  // dbservice.posthandler(insertquery,postData,function(err,results){
+  //   if (err) {
+  //     console.log("Error")
+  //   }
+  //   res.send(results)
+  // });
 }
 
 module.exports.putfunction = function(req,res) {

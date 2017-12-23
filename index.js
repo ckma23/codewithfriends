@@ -1,8 +1,10 @@
 var express = require('express'); //require express as the Javascript framework for Node
-var app = express(); // pass express now known as app
+var bodyParser = require('body-parser');
 var routes = require('./routes/mainroutes.js')
+var app = express(); // pass express now known as app
 
-app.use('/',routes);
+app.use(bodyParser.json());
+app.use('/', routes);
 
 app.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin","*");

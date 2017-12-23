@@ -15,8 +15,38 @@ function mysqlconnectioncloser(){
 }
 
 
-function databasecreator(){
-  connection.query()
+function databasecreator(query,callback){
+  mysqlconnectionopener();
+  connection.query(query,function(error,results,fileds){
+    if (error){
+      console.log("There was an error in creating the database",error)
+      return
+    }
+    else {
+      console.log("got a query back", query)
+      // return JSON.stringify(results)
+    }
+    console.log(results)
+    callback(error,results);
+  })
+  mysqlconnectioncloser();
+}
+
+function databasetablecreator(query,callback){
+  mysqlconnectionopener();
+  connection.query(query,function(error,results,fileds){
+    if (error){
+      console.log("There was an error in creating the database",error)
+      return
+    }
+    else {
+      console.log("got a query back", query)
+      // return JSON.stringify(results)
+    }
+    console.log(results)
+    callback(error,results);
+  })
+  mysqlconnectioncloser();
 }
 
 function gethandler(query,callback){
@@ -71,30 +101,32 @@ function posthandler(insertdata,postData,callback){
   mysqlconnectioncloser();
 }
 
-function puthandler(updatedata){
+function puthandler(updatedata,putData,callback){
   mysqlconnectionopener();
   console.log("Connected and ready to update a value into the db!");
-  connection.query(updatedata, function(error, results,fields){
+  connection.query(updatedata, putData,function(error, results,fields){
     if (error){
-      console.log("There was an error in inserting the data", error)
+      console.log("There was an error in updating the value the data", error)
     }
     else {
       console.log("record was inserted succesffuly", updatedata);
     }
+    callback(error,results);
   });
   mysqlconnectioncloser();
 }
 
-function deletehandler(deletedata){
+function deletehandler(deletedata,deleteData,callback){
   mysqlconnectionopener();
-  console.log("Connected and ready to update a value into the db!");
-  connection.query(deletedata, function(error, results,fields){
+  console.log("Connected and ready to delete a value into the db!");
+  connection.query(deletedata,deleteData, function(error, results,fields){
     if (error){
       console.log("There was an error in inserting the data", error)
     }
     else {
       console.log("record was inserted succesffuly", deletedata);
     }
+    callback(error,results);
   });
   mysqlconnectioncloser();
 }
@@ -104,3 +136,5 @@ module.exports.gethandlerid = gethandlerid;
 module.exports.posthandler = posthandler;
 module.exports.puthandler = puthandler;
 module.exports.deletehandler = deletehandler;
+module.exports.databasecreator = databasecreator;
+module.exports.databasetablecreator = databasetablecreator;

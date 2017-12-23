@@ -16,4 +16,10 @@ var server = app.listen(4000, function(){
   console.log('Listening on port', server.address().port)
 })
 
+function startupprint(Welcome,Message) {
+  console.log("App is up and running now",Welcome);
+  console.log("To seed the database and tables is mapped here",Message)
+}
+startupprint("CodewithFriends","--> mainroutes.js")
+
 module.exports = app;

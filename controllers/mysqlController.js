@@ -1,12 +1,4 @@
-var mysql = require ('mysql');
-var dbservice = require('./helper/dbservice.js');
-// var express = require('express');
-// var bodyParser = require('body-parser');
-// var app = express();
-
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
+var dbservice = require('../services/dbservice.js');
 
 module.exports.getfunction = function (req,res){
   const getquery = "Select * from Places"
@@ -28,36 +20,44 @@ module.exports.getfunctionid = function (req,res){
   });
 }
 
-// module.exports.postfunction = function(req,res) {
-//   const insertquery = "INSERT INTO Places(date, time, name, address) VALUES('2017-12-12','15:00:00','Coffee','Portland')"
-//   dbservice.inserthandler(insertquery)
-//   res.status(200);
-//   res.json({"status":"success"})
-// }
+// Template of expected POST
+// const insertquery = "INSERT INTO Places(date, time, name, address) VALUES('2017-12-12','15:00:00','Coffee','Portland')"
+  // let postData={"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}
 
 module.exports.postfunction = function(req,res){
-  // let postData = req.body;
-  // const insertquery = 'INSERT INTO Places SET ?'
+  let postData = req.body;
+  const postquery = 'INSERT INTO Places SET ?'
   console.log('req', req.body);
-  // let postData={"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}
-  // console.log(postData);
-  res.end();
-  // dbservice.posthandler(insertquery,postData,function(err,results){
-  //   if (err) {
-  //     console.log("Error")
-  //   }
-  //   res.send(results)
-  // });
+  console.log(postData);
+  dbservice.posthandler(postquery,postData,function(err,results){
+    if (err) {
+      console.log("Error")
+    }
+    res.send(results)
+  });
 }
 
 module.exports.putfunction = function(req,res) {
-  const putquery = "UPDATE Places SET name = 'Bowling' WHERE name = 'Brewery'"
-  dbservice.puthandler(putquery)
-  res.send("Record was updated successfully")
+  let putData = [req.body.date,req.body.time,req.body.name,req.body.address,req.body.id];
+  console.log(putData);
+  const putquery = "UPDATE Places SET `date`=?,`time`=?,`name`=?,`address`=? WHERE `id`=?"
+  console.log('req',req.body);
+  dbservice.puthandler(putquery,putData,function(err,results){
+    if (err) {
+      console.log("Error")
+    }
+    res.send(results)
+  });
 }
 
 module.exports.deletefunction = function(req,res) {
-  const deletequery = "DELETE FROM Places WHERE name = 'Bowling'"
-  dbservice.deletehandler(deletequery)
-  res.send("Record was deleted successfully")
+  let deleteData = req.body.id
+  const deletequery = "DELETE FROM Places WHERE id=?"
+  console.log(deleteData);
+  dbservice.deletehandler(deletequery,deleteData,function(err,results){
+    if (err){
+      console.log("Error")
+    }
+    res.send(results)
+  })
 }

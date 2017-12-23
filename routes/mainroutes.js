@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router(); // can be written as require('express').Router() to eliminate cross-file double variable naming of 'express'
 var mysqlController = require ('../controllers/mysqlController.js')
-// var bodyParser = require('body-parser');
-// var app = express();
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+var mysqldbtablecreator = require('../models/mysqldbtablecreator.js')
 
-router.get('/', function(req,res){
+router.get('/index', function(req,res){
   res.send('Welcome to back end API');
 });
 
@@ -16,5 +13,7 @@ router.put('/api',mysqlController.putfunction)
 router.post('/api',mysqlController.postfunction)
 router.delete('/api',mysqlController.deletefunction)
 
+router.get('/startdb',mysqldbtablecreator.startdbfunction) // this will startthedb create the database and the tables needed
+router.get('/starttable',mysqldbtablecreator.starttablefunction) // this will startthedb create the database and the tables needed
 
 module.exports = router;

@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/mainroutes.js')
 var app = express(); // pass express now known as app
 var port = process.env.PORT || 4000
+// var environment = app.get('env')
+var environment = process.env
+
 
 app.use(bodyParser.json());
 app.use('/', routes);
@@ -17,11 +20,12 @@ var server = app.listen(port, function(){
   console.log('Listening on port', server.address().port)
 })
 
-function startupprint(Welcome,Message) {
+function startupprint(Welcome,Message,environment) {
   console.log("App is up and running now",Welcome);
   console.log("To seed the database and tables is mapped here",Message)
-  // console.log("The environment is", app.get('env'));
+  console.log("The environment is", environment);
 }
-startupprint("CodewithFriends","--> mainroutes.js")
+startupprint("CodewithFriends","--> mainroutes.js",environment)
 
 module.exports = app;
+exports.environment = environment;

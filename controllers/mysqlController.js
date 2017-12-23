@@ -5,8 +5,9 @@ module.exports.getfunction = function (req,res){
   dbservice.gethandler(getquery, function(err,results){
     if (err) {
       console.log("Error")
+      // res.status(500).send("Internal server error")
     }
-    res.send(results)
+    res.status(200).send(results)
   });
 }
 

@@ -2,6 +2,7 @@ var express = require('express'); //require express as the Javascript framework 
 var bodyParser = require('body-parser');
 var routes = require('./routes/mainroutes.js')
 var app = express(); // pass express now known as app
+var port = process.env.PORT || 4000
 
 app.use(bodyParser.json());
 app.use('/', routes);
@@ -12,7 +13,7 @@ app.use(function(req,res,next){
   next();
 })
 
-var server = app.listen(5000, function(){
+var server = app.listen(port, function(){
   console.log('Listening on port', server.address().port)
 })
 

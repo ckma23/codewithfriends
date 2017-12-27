@@ -11,7 +11,7 @@ router.get('/api',mysqlController.getfunction)
 router.get('/api/:id?',mysqlController.getfunctionid)
 router.put('/api',mysqlController.putfunction)
 router.post('/api',mysqlController.postfunction)
-router.delete('/api',mysqlController.deletefunction)
+router.delete('/api/:id?',mysqlController.deletefunction)
 
 router.get('/startdb',mysqldbtablecreator.startdbfunction) // this will startthedb create the database and the tables needed
 router.get('/starttable',mysqldbtablecreator.starttablefunction) // this will startthedb create the database and the tables needed

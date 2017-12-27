@@ -11,8 +11,25 @@ CREATE TABLE IF NOT EXISTS Places(
   CREATE TABLE IF NOT EXISTS Users(
     id INT Primary Key AUTO_INCREMENT,
     Firstname VARCHAR(50),
-    Lastname VARCHAR(50));
+    Lastname VARCHAR(50),
+    Password VARCHAR(50),
+    userid VARCHAR(50);
 
+  CREATE TABLE IF NOT EXISTS TRIPS(
+    id INT Primary Key AUTO_INCREMENT,
+    Event VARCHAR(50),
+    creatoruserid VARCHAR(50),
+    friend1userid VARCHAR(50),
+    friend2userid  VARCHAR(50),
+    friend3userid  VARCHAR(50),
+    friend4userid VARCHAR(50);
+  )
 
+  CREATE TABLE IF NOT EXISTS Destinations(
+    id INT Primary KEY AUTO_INCREMENT,
+    Name VARCHAR(50),
+    Address VARCHAR (50),
+    Activities VARCHAR(50);
+  )
 -- INSERT INTO Places (date, time, name, address) VALUES ('2017-12-15', '15:00:00', 'beer', 'Belltown')
 -- {"date":"2017-12-15","time":"15:00:00","name":"beer","address":"Belltown"}

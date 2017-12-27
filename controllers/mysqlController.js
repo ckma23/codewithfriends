@@ -7,6 +7,7 @@ module.exports.getfunction = function (req,res){
       console.log("Error")
       // res.status(500).send("Internal server error")
     }
+    console.log("Hello")
     res.status(200).send(results)
   });
 }

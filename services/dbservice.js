@@ -7,7 +7,8 @@ var connectionparams = {
   database: process.env.DB_DATABASE || 'test'
 };
 
-var connection = mysql.createConnection(connectionparams)
+// var connection = mysql.createConnection(connectionparams)
+var pool = mysql.createPool(connectionparams)
 
 function mysqlconnectionopener() {
   // connection.connection();
@@ -37,6 +38,7 @@ function gethandler(query,callback){
   console.log("Checking heroku")
   connection.query(query, function (error,results,fields){
   console.log("Inside Error")
+    connection.release();
     if (error){
       console.log("There was an error in obtaining the query", error)
       return
@@ -45,10 +47,34 @@ function gethandler(query,callback){
       console.log("got a query back", query)
       // return JSON.stringify(results)
     }
+
     console.log("There was a total of", results.length)
     console.log(results)
     callback(error,results);
     // return results
+  })
+  // mysqlconnectioncloser();
+}
+
+
+function gethandler(query,callback){
+  // mysqlconnectionopener();
+  pool.getConnection(function(err,connection){
+    connection.query(query, function (error,results,fields){
+      connection.release();
+      if (error){
+        console.log("There was an error in obtaining the query", error)
+        return
+      }
+      else {
+        console.log("got a query back", query)
+        // return JSON.stringify(results)
+      }
+      console.log("There was a total of", results.length)
+      console.log(results)
+      callback(error,results);
+      // return results
+    })
   })
   // mysqlconnectioncloser();
 }

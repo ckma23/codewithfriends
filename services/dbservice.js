@@ -14,6 +14,12 @@ function mysqlconnectionopener() {
   console.log("We are connected", connection.threadId);
 }
 
+function mysqlconnectionerrorhandler(){
+  connection.on('error',function(err){
+    console.log("This was the handler error",err);
+  });
+}
+
 function mysqlconnectioncloser(){
   // connection.end(function(err){
   //   console.log("The sqlconnection",err)
@@ -23,6 +29,7 @@ function mysqlconnectioncloser(){
 
 function gethandler(query,callback){
   // mysqlconnectionopener();
+  mysqlconnectionerrorhandler();
   console.log("Checking heroku")
   connection.query(query, function (error,results,fields){
   console.log("Inside Error")

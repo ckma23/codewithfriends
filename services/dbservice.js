@@ -10,17 +10,41 @@ var connectionparams = {
 var connection = mysql.createConnection(connectionparams)
 
 function mysqlconnectionopener() {
+  // connection.connection();
   console.log("We are connected", connection.threadId);
 }
 
 function mysqlconnectioncloser(){
+  // connection.end(function(err){
+  //   console.log("The sqlconnection",err)
+  // });
   console.log("The connection is closed")
 }
 
+function gethandler(query,callback){
+  // mysqlconnectionopener();
+  console.log("Checking heroku")
+  connection.query(query, function (error,results,fields){
+  console.log("Inside Error")
+    if (error){
+      console.log("There was an error in obtaining the query", error)
+      return
+    }
+    else {
+      console.log("got a query back", query)
+      // return JSON.stringify(results)
+    }
+    console.log("There was a total of", results.length)
+    console.log(results)
+    callback(error,results);
+    // return results
+  })
+  mysqlconnectioncloser();
+}
 
 function databasecreator(query,callback){
   mysqlconnectionopener();
-  connection.query(query,function(error,results,fileds){
+  connection.query(query,function(error,results,fields){
     if (error){
       console.log("There was an error in creating the database",error)
       return
@@ -48,25 +72,6 @@ function databasetablecreator(query,callback){
     }
     console.log(results)
     callback(error,results);
-  })
-  mysqlconnectioncloser();
-}
-
-function gethandler(query,callback){
-  mysqlconnectionopener();
-  connection.query(query, function (error,results,fields){
-    if (error){
-      console.log("There was an error in obtaining the query", error)
-      return
-    }
-    else {
-      console.log("got a query back", query)
-      // return JSON.stringify(results)
-    }
-    console.log("There was a total of", results.length)
-    console.log(results)
-    callback(error,results);
-    // return results
   })
   mysqlconnectioncloser();
 }

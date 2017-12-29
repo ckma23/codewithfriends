@@ -18,6 +18,10 @@ function mysqlconnectionerrorhandler(){
   connection.on('error',function(err){
     console.log("This was the handler error",err);
   });
+  connection.connect(function(err){
+    console.log("Re-connection error",err);
+    setTimeout(mysqlconnectionerrorhandler, 2000);
+  });
 }
 
 function mysqlconnectioncloser(){

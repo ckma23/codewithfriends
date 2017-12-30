@@ -54,7 +54,7 @@ module.exports.putfunction = function(req,res) {
 
 module.exports.deletefunction = function(req,res) {
   let deleteData = req.params.id
-  const deletequery = "DELETE FROM Trips WHERE id=?"
+  const deletequery = "DELETE FROM Trips WHERE trip_id=?"
   console.log(deleteData);
   dbservice.deletehandler(deletequery,deleteData,function(err,results){
     if (err){

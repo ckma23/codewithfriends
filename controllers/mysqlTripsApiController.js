@@ -13,7 +13,7 @@ module.exports.getfunction = function (req,res){
 }
 
 module.exports.getfunctionid = function (req,res){
-  const getquery = "Select * from Places as p join Trips as t on t.trip_id = p.trip_id where t.trip_id= ?"
+  const getquery = "Select p.id,t.trip_id,date,time,name,address,trip_name,date_start,date_end from Places as p join Trips as t on t.trip_id = p.trip_id where t.trip_id= ?"
   dbservice.gethandlerid(getquery,req.params.id,function(err,results){
     if (err) {
       console.log("Error")

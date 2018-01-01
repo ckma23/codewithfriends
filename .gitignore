@@ -4,3 +4,5 @@ package-lock.json
 node_modules/
 #ignore yelp API key local file
 config/yelpapi.json
+#ingore the dotenv file
+.env

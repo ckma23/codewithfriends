@@ -2,3 +2,5 @@
 package-lock.json
 #ignore node_modules
 node_modules/
+#ignore yelp API key local file
+config/yelpapi.json

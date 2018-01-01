@@ -1,12 +1,12 @@
 var yelpApiSetup = require ('../config/yelpapi.json')
 
 'use strict';
-
 const yelp = require('yelp-fusion');
 
 var yelpApiParams = {
   apiKey: process.env.YELPAPIKEY || yelpApiSetup.apiKey,
 };
+
 
 const client = yelp.client(yelpApiParams.apiKey);
 
